@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="google" content="notranslate">
+  <meta http-equiv="Content-Language" content="en">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:300,400,900" rel="stylesheet">
+  <script src="js/jquery-3.2.1.js"></script>
+  <script src="js/jszip.js"></script>
+  <script src="js/jszip-utils.js"></script>
+  <script src="js/FileSaver.js"></script>
+  <script src="js/script.js"></script>
+  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="css/styles.css" rel="stylesheet" type="text/css">
+  <title>My page Title</title>
+</head>
+
+<body>
+  <div id="container" class="container">
+
+    <div class="row">
+
+      <!-- A form example -->
+      <div class="col-lg-6">
+        <div class="well bs-component">
+          <form id="zipForm" class="form-horizontal">
+            <fieldset>
+              <legend>Legend</legend>
+              <div class="form-group">
+                <label for="inputName" class="col-lg-2 control-label">Name</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" id="inputName" placeholder="Name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                <div class="col-lg-10">
+                  <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                  <div class="checkbox">
+                    <label>
+					          <input type="checkbox"> Checkbox
+                    <ul id="optionNameMenu">
+                    </ul>
+				            </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                  <button type="reset" class="btn btn-default">Cancel</button>
+                  <button id="zipButton" type="submit" class="btn btn-primary">Download</button>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+      <!--end of column -->
+    </div>
+  </div>
+  <div id="footer" class="container">
+    <p>(C) STEVE ZASKE, 2017</p>
+  </div>
+</body>
+
+</html>
