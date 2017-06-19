@@ -1,3 +1,60 @@
+//Business Logic
+//Array of opions available on the web site
+var options = [];
+
+// add out list of items
+options.push(new TemplateItem("bootstrap", "bootstrap.css", "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"));
+options.push(new TemplateItem("jquery", "jquery-3.2.1.js", "https://code.jquery.com/jquery-3.2.1.min.js"));
+
+
+// Template Item Object Constructor
+function TemplateItem(name, filename, url) {
+  this.name = name;
+  this.filename = filename;
+  this.url = url;
+}
+
+function HeadItem(headString,placeInHead){
+  this.headString = headString;
+  this.placeInHead = placeInHead;
+}
+
+//Index Object Constructor
+function Index() {
+  this.first = "<!DOCTYPE html>\n<html>\n"
+  this.headItem = [];
+  this.last = "  <body>\n  </body>\n</html>"
+  this.head = function() {
+    tempHead = "  <head>"
+    this.headItem.forEach(function(item){
+      tempHead+="\n    " + item.headString;
+    });
+    tempHead+="\n  </head>\n";
+    return tempHead;
+  }
+  this.index = function(){
+    return this.first + this.head() + this.last;
+  };
+}
+
+function writeScriptHead(url){
+  //dummie code for now - need to add logic here
+  return "<script src='js/" + url + "'></script>"
+}
+
+var newIndex = new Index();
+
+var newhea1 = new HeadItem(writeScriptHead("https://code.jquery.com/jquery-3.2.1.min.js"),0);
+var newhea2 = new HeadItem(writeScriptHead("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"),1);
+
+newIndex.headItem.push(newhea1);
+newIndex.headItem.push(newhea2);
+
+console.log(newIndex.index());
+
+//UI Logic
+
+
 $(document).ready(function() {
 
   "use strict";
@@ -65,18 +122,9 @@ $(document).ready(function() {
     });
   }
 
-  // our object
-  function templateItem(name, filename, url) {
-    this.name = name;
-    this.filename = filename;
-    this.url = url;
-  }
 
-  var options = [];
 
-  // add out list of items
-  options.push(new templateItem("bootstrap", "bootstrap.css", "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"));
-  options.push(new templateItem("jquery", "jquery-3.2.1.js", "https://code.jquery.com/jquery-3.2.1.min.js"));
+
 
   var optionList = $('#optionNameMenu')
 
@@ -104,8 +152,7 @@ $(document).ready(function() {
   $("#zipForm").submit(function(event) {
     event.preventDefault();
     var zip = new JSZip();
-    zip.file("readme.txt", "is this really in the file\nI guess I'll see");
-    zip.file("js/hello.js", "alert('hi');");
+    zip.file("index.html",newIndex.index());
 
     //var url = "/jszip/test/ref/complex_files/Franz Kafka - The Metamorphosis.epub";
     //var filename = "Franz Kafka - The Metamorphosis.epub";
@@ -117,11 +164,11 @@ $(document).ready(function() {
     // var url = "https://www.zaske.com/me.png";
 
     //does work
-    var url = "https://www.zaske.com/files/resume_stz.pdf";
-    var filename = "img/me.png";
+    // var url = "https://www.zaske.com/files/resume_stz.pdf";
+    // var filename = "img/me.png";
 
 
-    zip.file(filename, urlToPromise(url), { binary: true });
+    // zip.file(filename, urlToPromise(url), { binary: true });
 
     //works
     zip.file("bootstrap.css", urlToPromise("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"), { binary: true });
