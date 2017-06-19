@@ -1,18 +1,17 @@
 //Business Logic
-//Array of opions available on the web site
-var options = [];
-
-// add out list of items
-options.push(new TemplateItem("bootstrap", "bootstrap.css", "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"));
-options.push(new TemplateItem("jquery", "jquery-3.2.1.js", "https://code.jquery.com/jquery-3.2.1.min.js"));
+//Array of options available on the web site
+var options = [
+  {name: "jQuery", webUrl: "https://code.jquery.com/jquery-3.2.1.min.js" , zipFolder: "js/", headContent: "jquery-3.2.1.min.js"},
+  {name: "Bootstrap", webUrl: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" , zipFolder: "css/", headContent: "bootstrap.min.css"},
+  {name: "README.md", webUrl: "" , zipFolder: "", headContent: ""}];
 
 
 // Template Item Object Constructor
-function TemplateItem(name, filename, url) {
-  this.name = name;
-  this.filename = filename;
-  this.url = url;
-}
+// function TemplateItem(name, filename, url) {
+//   this.name = name;
+//   this.filename = filename;
+//   this.url = url;
+// }
 
 function HeadItem(headString,placeInHead){
   this.headString = headString;
