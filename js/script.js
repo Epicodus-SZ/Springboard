@@ -81,23 +81,62 @@ $(document).ready(function() {
   var optionList = $('#optionNameMenu')
 
   //dynamic checkboxes
+
   $.each(options, function(item) {
-    var li = $('<li/>')
-      .addClass('ui-menu-item')
-      .attr('role', 'menuitem')
+    var rowDiv = $('<div/>')
+      .addClass('row')
       .appendTo(optionList);
 
-    var input = $('<input/>')
-      .addClass('ui-all')
-      .attr('type', 'checkbox')
-      .data('url', options[item].url)
-      .appendTo(li);
+    var columnOneDiv = $('<div/>')
+      .addClass('col-lg-6')
+      .appendTo(rowDiv);
 
     var label = $('<label/>')
       .addClass('ui-all')
       .text(options[item].name)
-      .appendTo(li);
+      .appendTo(columnOneDiv);
+
+    var columnTwoDiv = $('<div/>')
+      .addClass('col-lg-3')
+      .appendTo(rowDiv);
+
+    var input1 = $('<input/>')
+      .addClass('ui-all')
+      .attr('type', 'checkbox')
+      .data('url', options[item].url)
+      .appendTo(columnTwoDiv);
+
+    // var columnThreeDiv = $('<div/>')
+    //   .addClass('col-lg-3')
+    //   .appendTo(rowDiv);
+    //
+    // var input2 = $('<input/>')
+    //   .addClass('ui-all')
+    //   .attr('type', 'checkbox')
+    //   .text("need this link")
+    //   .appendTo(columnThreeDiv);
+
+
   });
+
+  //dynamic checkboxes
+  // $.each(options, function(item) {
+  //   var li = $('<li/>')
+  //     .addClass('ui-menu-item')
+  //     .attr('role', 'menuitem')
+  //     .appendTo(optionList);
+  //
+  //   var input = $('<input/>')
+  //     .addClass('ui-all')
+  //     .attr('type', 'checkbox')
+  //     .data('url', options[item].url)
+  //     .appendTo(li);
+  //
+  //   var label = $('<label/>')
+  //     .addClass('ui-all')
+  //     .text(options[item].name)
+  //     .appendTo(li);
+  // });
 
 
 
