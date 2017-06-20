@@ -130,29 +130,38 @@ $(document).ready(function() {
   //dynamic checkboxes
 
   $.each(options, function(item) {
-    var rowDiv = $('<div/>')
-      .addClass('row')
+    var colDiv = $('<div/>')
+      .addClass('col-sm-10')
       .appendTo(optionList);
 
-    var columnOneDiv = $('<div/>')
-      .addClass('col-lg-6')
-      .appendTo(rowDiv);
+    var formCheck = $('<div/>')
+      .addClass('form-check')
+      .appendTo(colDiv);
 
     var label = $('<label/>')
       .addClass('ui-all')
+      .addClass('form-check-label')
       .text(options[item].name)
-      .appendTo(columnOneDiv);
+      .appendTo(formCheck);
 
-    var columnTwoDiv = $('<div/>')
-      .addClass('col-lg-3')
-      .appendTo(rowDiv);
-
-    var input1 = $('<input/>')
+    var inputCheckbox = $('<input/>')
       .addClass('ui-all')
+      .addClass('form-check-input')
       .attr('type', 'checkbox')
       .attr('value', options[item].name)
       .data('url', options[item].url)
-      .appendTo(columnTwoDiv);
+      .prependTo(label);
+
+    // var columnTwoDiv = $('<div/>')
+    //   .addClass('col-sm-3')
+    //   .appendTo(rowDiv);
+    //
+    // var input1 = $('<input/>')
+    //   .addClass('ui-all')
+    //   .attr('type', 'checkbox')
+    //   .attr('value', options[item].name)
+    //   .data('url', options[item].url)
+    //   .appendTo(columnTwoDiv);
 
     // var columnThreeDiv = $('<div/>')
     //   .addClass('col-lg-3')
@@ -195,8 +204,6 @@ $(document).ready(function() {
 
     $("input[type='checkbox']:checked").each (function() {
       checkedArray.push($(this).val());
-
-      console.log(checkedArray);
     });
 
     zip.file("index.html",newIndex.index());
@@ -252,7 +259,6 @@ $(document).ready(function() {
   $("#resetButton").click (function() {
     $("#zipForm")[0].reset();
     var checkedArray = [];
-    alert("cancel button");
   });
 
 });
