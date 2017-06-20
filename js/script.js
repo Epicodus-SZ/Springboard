@@ -6,7 +6,6 @@ var options = [
   {name: "README.md", webUrl: "" , zipFolder: "", headContent: ""}];
 
 var checkedArray = [];
-var checkboxObjArray = [];
 
 function HeadItem(headString,placeInHead){
   this.headString = headString;
@@ -72,29 +71,9 @@ function GenerateReadme() {
 
     tempString += jsBegValue + 'js/scripts.js' + jsEndValue;
 
-
-
-    // for(var i=0;i<checked.length;i++) {
-    //
-    //   for(var j=0;j<options.length;j++) {
-    //
-    //     if (checked[i]===options[j].name && options[j].webUrl !== "") {
-    //
-    //       if (options[j].zipFolder === "js/") {
-    //         tempString += jsBegValue + options[j].zipFolder + options[j].headContent + jsEndValue + "\n";
-    //         tempString += jsBegValue + 'js/scripts.js' + jsEndValue + "\n";
-    //       } else {
-    //         tempString += cssBegValue + options[j].zipFolder + options[j].headContent + cssEndValue + "\n";
-    //         tempString += cssBegValue + 'css/styles.css' + cssEndValue + "\n";
-    //       }
-    //
-    //     }
-    //   }
-    // }
     var slicedTempString = tempString.slice(0,-1); //removes trailing newline
     return slicedTempString;
 
-    //var values = {name: checked[0].name ,url}
   }
 
 //////////////////////////////
@@ -219,7 +198,6 @@ $(document).ready(function() {
     var newIndex = new Index();
 
     //gets the selected items from our form
-    var checkedArray = [];
     $("input[type='checkbox']:checked").each (function() {
       checkedArray.push($(this).val());
     }); // will delete if checkedObjectArray works
