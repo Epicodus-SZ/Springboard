@@ -5,6 +5,8 @@
   <meta name="google" content="notranslate">
   <meta http-equiv="Content-Language" content="en">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:300,400,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
+  <link href="http://fonts.googleapis.com/css?family=Bigelow+Rules" rel="stylesheet" type="text/css">
   <script src="js/jquery-3.2.1.js"></script>
   <script src="js/jszip.js"></script>
   <script src="js/jszip-utils.js"></script>
@@ -12,6 +14,7 @@
   <script src="js/string.js"></script>
   <script src="js/script.js"></script>
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet" type="text/css">
   <title>My page Title</title>
 </head>
@@ -22,43 +25,35 @@
     <div class="row">
 
       <!-- A form example -->
-      <div class="col-lg-6">
-        <div class="well bs-component">
+      <div class="col-lg-12">
+        <div class="bs-component">
           <form id="zipForm" class="form-horizontal">
-            <fieldset>
-              <legend>Dev Maker</legend>
+            <!-- <fieldset> -->
+              <h1>Template / <span class="russian">образец</span></h1>
               <div class="form-group">
                 <label for="inputProject" class="col-lg-2 control-label">Project</label>
                 <div class="col-lg-10">
                   <input type="text" class="form-control" id="inputProject" placeholder="Project Name">
                 </div>
               </div>
-
-
               <div class="form-group">
                 <label for="inputName" class="col-lg-2 control-label">Developer</label>
                 <div class="col-lg-10">
                   <input type="text" class="form-control" id="inputName" placeholder="Developer Name">
                   <div class="checkbox">
-
-					          <h4>Check the following to include:</h4>
+					          <p>Select the items you want incuded in your project:</p>
                     <div id="optionNameMenu" class="form-group-row">
-
-
                     </div>
-
                   </div>
                 </div>
               </div>
-
-
               <div class="form-group">
                 <div class="col-lg-10 col-lg-offset-2">
                   <button type="button" class="btn btn-default" id="resetButton">Cancel</button>
-                  <button id="zipButton" type="submit" class="btn btn-primary">Download</button>
+
+                  <!-- <button id="zipButton" type="submit" class="btn btn-primary">Download</button> -->
                 </div>
               </div>
-            </fieldset>
           </form>
         </div>
       </div>
@@ -68,6 +63,17 @@
   <div id="footer" class="container">
     <p>(C) STEVE ZASKE, 2017</p>
   </div>
+  <div id="buttonContainer" class="container">
+      <div class="content center">
+        <div class="cont_tasto cont_tasto_upload">
+      <a id="resetButton" class="tasto"><i class="fa fa-cloud-download"></i><span class="text">Download it!</span></a>
+        </div>
+          <div class="cont_tasto cont_tasto_upload">
+        <a id="zipButton" class="tasto"><i class="fa fa-cloud-download"></i><span class="text">Download it!</span></a>
+          </div>
+      </div>
+  </div>
+
 </body>
 
 </html>

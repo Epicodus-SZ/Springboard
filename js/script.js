@@ -116,34 +116,44 @@ $(document).ready(function() {
   }
 
   var optionList = $('#optionNameMenu')
+  //
+  // <div class="checkbox">
+  //   <label style="font-size: 1.5em">
+  //       <input type="checkbox" value="">
+  //       <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+  //       Bigger
+  //   </label>
+  // </div>
+
+
 
   //dynamic checkboxes
   $.each(options, function(item) {
-    var colDiv = $('<div/>')
-      .addClass('col-sm-10')
+
+    var formCheck = $('<div>')
+      .addClass('checkbox')
       .appendTo(optionList);
 
-    var formCheck = $('<div/>')
-      .addClass('form-check')
-      .appendTo(colDiv);
-
-    var label = $('<label/>')
-      .addClass('ui-all')
-      .addClass('form-check-label')
+    var label = $('<label>')
+      .addClass('cbLabel')
       .text(options[item].name)
-      .appendTo(formCheck);
+      .appendTo($(".checkbox").last());
 
-    var inputCheckbox = $('<input/>')
-      .addClass('ui-all')
-      .addClass('form-check-input')
+    var inputCheckbox = $('<input>')
       .attr('type', 'checkbox')
       .attr('value', options[item].name)
-      .data('url', options[item].url)
-      .prependTo(label);
+      .appendTo($(".cbLabel").last());
 
+    var span = $('<span>')
+      .addClass('cr')
+      .appendTo($(".cbLabel").last());
+
+    var fancyCB = $('<i>')
+      .addClass('cr-icon fa fa-check')
+      .appendTo($(".cr").last());
   });
 
-  $("#zipForm").submit(function(event) {
+  $("#zipButton").click(function(event) {
     event.preventDefault(); // supresses a server event
 
     //creates our zip file object
