@@ -191,6 +191,14 @@ $(document).ready(function() {
   $("#zipForm").submit(function(event) {
     event.preventDefault();
     var zip = new JSZip();
+    var checkedArray = [];
+
+    $("input[type='checkbox']:checked").each (function() {
+      checkedArray.push($(this).val());
+
+      console.log(checkedArray);
+    });
+
     zip.file("index.html",newIndex.index());
 
     //var url = "/jszip/test/ref/complex_files/Franz Kafka - The Metamorphosis.epub";
@@ -239,15 +247,12 @@ $(document).ready(function() {
     //       saveAs(blob, "hello.zip");
     //     });
   });
-  var checkedArray = [];
 
-  $("#zipButton").click (function() {
-    $("input[type='checkbox']:checked").each (function() {
-      checkedArray.push($(this).val());
-    });
 
-    alert(checkedArray);
+  $("#resetButton").click (function() {
+    $("#zipForm").reset();
+    checkedArray = [];
+    alert("cancel button");
   });
-
 
 });
