@@ -51,7 +51,22 @@ newIndex.headItem.push(newhea2);
 
 console.log(newIndex.index());
 
+//Generating README
+function Readme() {
+
+  // var str = "Hello {{name}}! How are you doing during the year of {{date-year}}?"
+  // var values = {name: 'JP', 'date-year': 2013}
+  // console.log(S(str).template(values).s) //'Hello JP! How are you doing during the year of 2013?'
+
+  this.text = function(){
+    var values = {name: $("#inputProject").val(), dev: $("#inputName").val()}
+    stringText = "# {{name}}\nA simple description. Originally coded on 6/6/2017. By {{dev}}."
+    return S(stringText).template(values).s;
+  };
+}
 //UI Logic
+
+
 
 
 $(document).ready(function() {
@@ -198,14 +213,25 @@ $(document).ready(function() {
 
 
   $("#zipForm").submit(function(event) {
-    event.preventDefault();
+    event.preventDefault(); // supresses a server event
+
+    //creates our zip file object
     var zip = new JSZip();
+
     var checkedArray = [];
 
     $("input[type='checkbox']:checked").each (function() {
       checkedArray.push($(this).val());
     });
 
+
+    ///////////////////////////////////////
+    //our code should go here
+    ///////////////////////////////////////
+var tempReadme = new Readme();
+console.log(tempReadme.text());
+
+    //Adds the index.html file to the zip
     zip.file("index.html",newIndex.index());
 
     //var url = "/jszip/test/ref/complex_files/Franz Kafka - The Metamorphosis.epub";
@@ -225,8 +251,8 @@ $(document).ready(function() {
     // zip.file(filename, urlToPromise(url), { binary: true });
 
     //works
-    zip.file("bootstrap.css", urlToPromise("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"), { binary: true });
-    zip.file("jquery-3.2.1.js", urlToPromise("https://code.jquery.com/jquery-3.2.1.min.js"), { binary: true });
+    //zip.file("bootstrap.css", urlToPromise("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"), { binary: true });
+    // zip.file("jquery-3.2.1.js", urlToPromise("https://code.jquery.com/jquery-3.2.1.min.js"), { binary: true });
 
     // when everything has been downloaded, we can trigger the dl
     zip.generateAsync({ type: "blob" }, function updateCallback(metadata) {
@@ -254,6 +280,7 @@ $(document).ready(function() {
     //       saveAs(blob, "hello.zip");
     //     });
   });
+
 
 
   $("#resetButton").click (function() {
