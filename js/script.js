@@ -1,10 +1,12 @@
 //Business Logic
 //Array of options available on the web site
 var options = [
-  {name: "jQuery", webUrl: "https://code.jquery.com/jquery-3.2.1.min.js" , zipFolder: "js/", headContent: "jquery-3.2.1.min.js"},
-  {name: "Bootstrap", webUrl: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" , zipFolder: "css/", headContent: "bootstrap.min.css"},
+  {name: "Bootstrap", webUrl: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" , zipFolder: "css/", headContent: "bootstrap.css"},
+  {name: "jQuery", webUrl: "https://code.jquery.com/jquery-3.2.1.min.js" , zipFolder: "js/", headContent: "jquery-3.2.1.js"},
   {name: "README.md", webUrl: "" , zipFolder: "", headContent: ""}];
 
+var checkedArray = [];
+var checkboxObjArray = [];
 
 function HeadItem(headString,placeInHead){
   this.headString = headString;
@@ -17,14 +19,18 @@ function Index() {
   this.headItem = [];
   this.last = "  <body>\n  </body>\n</html>"
   this.head = function() {
-    tempHead = "  <head>"
-    this.headItem.forEach(function(item){
-      tempHead+="\n    " + item.headString;
-    });
+    var tempHead = "  <head>\n"
+    var s = headData(checkedArray);
+    tempHead += s;
+    // this.headItem.forEach(function(item){
+    //  tempHead+="\n    " + item.headString;
+    // });
     tempHead+="\n  </head>\n";
+    console.log(tempHead);
     return tempHead;
   }
   this.index = function(){
+    console.log(this.first + this.head() + this.last);
     return this.first + this.head() + this.last;
   };
 }
@@ -33,6 +39,7 @@ function writeScriptHead(url){
   //dummie code for now - need to add logic here
   return "<script src='js/" + url + "'></script>"
 }
+
 
 //Generating README
 function GenerateReadme() {
@@ -43,6 +50,52 @@ function GenerateReadme() {
     return S(readmeText).template(values).s;
 }
 
+//Generating head data
+  function headData(checkedArray) {
+    var cssBegValue = '    <link href="';
+    var cssEndValue = '" rel="stylesheet" type="text/css">\n';
+    var jsBegValue = '    <script href="';
+    var jsEndValue = '"></script>\n';
+    var tempString = "";
+
+    if ($.inArray("Bootstrap",checkedArray)!==-1) {
+      var bootstrap = options.find(function (item) {return item.name === 'Bootstrap';});
+      tempString += cssBegValue + bootstrap.zipFolder + bootstrap.headContent + cssEndValue;
+    }
+
+    tempString += cssBegValue + 'css/styles.css' + cssEndValue;
+
+    if ($.inArray("jQuery",checkedArray)!==-1) {
+      var jQuery = options.find(function (item) {return item.name === 'jQuery';});
+      tempString += jsBegValue + jQuery.zipFolder + jQuery.headContent + jsEndValue;
+    }
+
+    tempString += jsBegValue + 'js/scripts.js' + jsEndValue;
+
+
+
+    // for(var i=0;i<checked.length;i++) {
+    //
+    //   for(var j=0;j<options.length;j++) {
+    //
+    //     if (checked[i]===options[j].name && options[j].webUrl !== "") {
+    //
+    //       if (options[j].zipFolder === "js/") {
+    //         tempString += jsBegValue + options[j].zipFolder + options[j].headContent + jsEndValue + "\n";
+    //         tempString += jsBegValue + 'js/scripts.js' + jsEndValue + "\n";
+    //       } else {
+    //         tempString += cssBegValue + options[j].zipFolder + options[j].headContent + cssEndValue + "\n";
+    //         tempString += cssBegValue + 'css/styles.css' + cssEndValue + "\n";
+    //       }
+    //
+    //     }
+    //   }
+    // }
+    var slicedTempString = tempString.slice(0,-1); //removes trailing newline
+    return slicedTempString;
+
+    //var values = {name: checked[0].name ,url}
+  }
 
 //////////////////////////////
 //UI Logic
@@ -151,6 +204,7 @@ $(document).ready(function() {
     var projectName = $("#inputProject").val();
     var developerName = $("#inputName").val();
 
+
     //creates a new index object
     var newIndex = new Index();
 
@@ -158,7 +212,7 @@ $(document).ready(function() {
     var checkedArray = [];
     $("input[type='checkbox']:checked").each (function() {
       checkedArray.push($(this).val());
-    });
+    }); // will delete if checkedObjectArray works
 
     //Adds a README to the zip file
     if ($.inArray("README.md",checkedArray) > -1) {
@@ -198,7 +252,6 @@ $(document).ready(function() {
       }, function(e) {
         showError(e);
       });
-
   });
 
 
