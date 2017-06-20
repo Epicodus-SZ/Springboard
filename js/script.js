@@ -6,13 +6,6 @@ var options = [
   {name: "README.md", webUrl: "" , zipFolder: "", headContent: ""}];
 
 
-// Template Item Object Constructor
-// function TemplateItem(name, filename, url) {
-//   this.name = name;
-//   this.filename = filename;
-//   this.url = url;
-// }
-
 function HeadItem(headString,placeInHead){
   this.headString = headString;
   this.placeInHead = placeInHead;
@@ -41,33 +34,19 @@ function writeScriptHead(url){
   return "<script src='js/" + url + "'></script>"
 }
 
-var newIndex = new Index();
-
-var newhea1 = new HeadItem(writeScriptHead("https://code.jquery.com/jquery-3.2.1.min.js"),0);
-var newhea2 = new HeadItem(writeScriptHead("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"),1);
-
-newIndex.headItem.push(newhea1);
-newIndex.headItem.push(newhea2);
-
-console.log(newIndex.index());
-
 //Generating README
-function Readme() {
-
-  // var str = "Hello {{name}}! How are you doing during the year of {{date-year}}?"
-  // var values = {name: 'JP', 'date-year': 2013}
-  // console.log(S(str).template(values).s) //'Hello JP! How are you doing during the year of 2013?'
-
-  this.text = function(){
-    var values = {name: $("#inputProject").val(), dev: $("#inputName").val()}
-    stringText = "# {{name}}\nA simple description. Originally coded on 6/6/2017. By {{dev}}."
-    return S(stringText).template(values).s;
-  };
+function GenerateReadme() {
+    var d = new Date();
+    var today = (d.getMonth()+1)+"/"+d.getDate()+"/"+d.getFullYear();
+    var values = {name: $("#inputProject").val(), dev: $("#inputName").val(), day: today}
+    readmeText = "# {{name}}\n[Add your description here]. Originally coded on {{day}}. By {{dev}}. \n### License\nCopyright 2017 {{dev}}\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.";
+    return S(readmeText).template(values).s;
 }
+
+
+//////////////////////////////
 //UI Logic
-
-
-
+//////////////////////////////
 
 $(document).ready(function() {
 
@@ -136,14 +115,9 @@ $(document).ready(function() {
     });
   }
 
-
-
-
-
   var optionList = $('#optionNameMenu')
 
   //dynamic checkboxes
-
   $.each(options, function(item) {
     var colDiv = $('<div/>')
       .addClass('col-sm-10')
@@ -167,92 +141,44 @@ $(document).ready(function() {
       .data('url', options[item].url)
       .prependTo(label);
 
-    // var columnTwoDiv = $('<div/>')
-    //   .addClass('col-sm-3')
-    //   .appendTo(rowDiv);
-    //
-    // var input1 = $('<input/>')
-    //   .addClass('ui-all')
-    //   .attr('type', 'checkbox')
-    //   .attr('value', options[item].name)
-    //   .data('url', options[item].url)
-    //   .appendTo(columnTwoDiv);
-
-    // var columnThreeDiv = $('<div/>')
-    //   .addClass('col-lg-3')
-    //   .appendTo(rowDiv);
-    //
-    // var input2 = $('<input/>')
-    //   .addClass('ui-all')
-    //   .attr('type', 'checkbox')
-    //   .text("need this link")
-    //   .appendTo(columnThreeDiv);
-
-
   });
-
-  //dynamic checkboxes
-  // $.each(options, function(item) {
-  //   var li = $('<li/>')
-  //     .addClass('ui-menu-item')
-  //     .attr('role', 'menuitem')
-  //     .appendTo(optionList);
-  //
-  //   var input = $('<input/>')
-  //     .addClass('ui-all')
-  //     .attr('type', 'checkbox')
-  //     .data('url', options[item].url)
-  //     .appendTo(li);
-  //
-  //   var label = $('<label/>')
-  //     .addClass('ui-all')
-  //     .text(options[item].name)
-  //     .appendTo(li);
-  // });
-
-
 
   $("#zipForm").submit(function(event) {
     event.preventDefault(); // supresses a server event
 
     //creates our zip file object
     var zip = new JSZip();
+    var projectName = $("#inputProject").val();
+    var developerName = $("#inputName").val();
 
+    //creates a new index object
+    var newIndex = new Index();
+
+    //gets the selected items from our form
     var checkedArray = [];
-
     $("input[type='checkbox']:checked").each (function() {
       checkedArray.push($(this).val());
     });
 
-
-    ///////////////////////////////////////
-    //our code should go here
-    ///////////////////////////////////////
-var tempReadme = new Readme();
-console.log(tempReadme.text());
+    //Adds a README to the zip file
+    if ($.inArray("README.md",checkedArray) > -1) {
+      zip.file(projectName+"/README.md",GenerateReadme());
+    }
 
     //Adds the index.html file to the zip
-    zip.file("index.html",newIndex.index());
+    zip.file(projectName+"/index.html",newIndex.index());
 
-    //var url = "/jszip/test/ref/complex_files/Franz Kafka - The Metamorphosis.epub";
-    //var filename = "Franz Kafka - The Metamorphosis.epub";
+    //Add the files to the zip
+    checkedArray.forEach(function(item){
 
-    // works
-    //var url = "https://s3.amazonaws.com/www.zaske.com/me.png";
+      var Opts = $.grep(options, function(option){ return option.name === item; });
 
-    //does not because of a strange IMAGE CORS configuration issue on AWS S3
-    // var url = "https://www.zaske.com/me.png";
-
-    //does work
-    // var url = "https://www.zaske.com/files/resume_stz.pdf";
-    // var filename = "img/me.png";
-
-
-    // zip.file(filename, urlToPromise(url), { binary: true });
-
-    //works
-    //zip.file("bootstrap.css", urlToPromise("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"), { binary: true });
-    // zip.file("jquery-3.2.1.js", urlToPromise("https://code.jquery.com/jquery-3.2.1.min.js"), { binary: true });
+      if (Opts[0].webUrl){
+        var url = Opts[0].webUrl;
+        var filename = projectName+"/"+Opts[0].zipFolder+Opts[0].headContent;
+        zip.file(filename, urlToPromise(url), { binary: true });
+      }
+    });
 
     // when everything has been downloaded, we can trigger the dl
     zip.generateAsync({ type: "blob" }, function updateCallback(metadata) {
@@ -260,25 +186,19 @@ console.log(tempReadme.text());
         if (metadata.currentFile) {
           msg += ", current file = " + metadata.currentFile;
         }
-        showMessage(msg);e
+        showMessage(msg);
         updatePercent(metadata.percent | 0);
       })
       .then(function callback(blob) {
 
         // see FileSaver.js
-        saveAs(blob, "example.zip");
+        saveAs(blob, projectName+".zip");
 
         showMessage("done !");
       }, function(e) {
         showError(e);
       });
 
-
-    // create the file and send to user
-    //   zip.generateAsync({ type: "blob" })
-    //     .then(function(blob) {
-    //       saveAs(blob, "hello.zip");
-    //     });
   });
 
 
