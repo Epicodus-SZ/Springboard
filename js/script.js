@@ -1,10 +1,11 @@
 //Business Logic
 //Array of options available on the web site
 var options = [
-  {name: "jQuery", webUrl: "https://code.jquery.com/jquery-3.2.1.min.js" , zipFolder: "js/", headContent: "jquery-3.2.1.min.js"},
   {name: "Bootstrap", webUrl: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" , zipFolder: "css/", headContent: "bootstrap.min.css"},
+  {name: "jQuery", webUrl: "https://code.jquery.com/jquery-3.2.1.min.js" , zipFolder: "js/", headContent: "jquery-3.2.1.min.js"},
   {name: "README.md", webUrl: "" , zipFolder: "", headContent: ""}];
 
+var checkedArray = [];
 
 // Template Item Object Constructor
 // function TemplateItem(name, filename, url) {
@@ -24,11 +25,14 @@ function Index() {
   this.headItem = [];
   this.last = "  <body>\n  </body>\n</html>"
   this.head = function() {
-    tempHead = "  <head>"
-    this.headItem.forEach(function(item){
-      tempHead+="\n    " + item.headString;
-    });
+    var tempHead = "  <head>\n"
+    var s = headData(checkedArray,options);
+    tempHead += s;
+    // this.headItem.forEach(function(item){
+    //  tempHead+="\n    " + item.headString;
+    // });
     tempHead+="\n  </head>\n";
+    alert(tempHead);
     return tempHead;
   }
   this.index = function(){
@@ -49,7 +53,7 @@ var newhea2 = new HeadItem(writeScriptHead("https://maxcdn.bootstrapcdn.com/boot
 newIndex.headItem.push(newhea1);
 newIndex.headItem.push(newhea2);
 
-console.log(newIndex.index());
+
 
 //Generating README
 function Readme() {
@@ -64,6 +68,36 @@ function Readme() {
     return S(stringText).template(values).s;
   };
 }
+
+//Generating head data
+  function headData(checked,options) {
+    var cssBegValue = '    <link href="';
+    var cssEndValue = '" rel="stylesheet" type="text/css">';
+    var jsBegValue = '    <script href="';
+    var jsEndValue = '"></script>';
+    var tempString = "";
+    for(var i=0;i<checked.length;i++) {
+
+      for(var j=0;j<options.length;j++) {
+
+        if (checked[i]===options[j].name && options[j].webUrl !== "") {
+
+          if (options[j].zipFolder === "js/") {
+            tempString += jsBegValue + options[j].zipFolder + options[j].headContent + jsEndValue + "\n";
+            tempString += jsBegValue + 'js/scripts.js' + jsEndValue + "\n";
+          } else {
+            tempString += cssBegValue + options[j].zipFolder + options[j].headContent + cssEndValue + "\n";
+            tempString += cssBegValue + 'css/styles.css' + cssEndValue + "\n";
+          }
+
+        }
+      }
+    }
+    var slicedTempString = tempString.slice(0,-1); //removes trailing newline
+    return slicedTempString;
+
+    //var values = {name: checked[0].name ,url}
+  }
 //UI Logic
 
 
@@ -218,7 +252,7 @@ $(document).ready(function() {
     //creates our zip file object
     var zip = new JSZip();
 
-    var checkedArray = [];
+
 
     $("input[type='checkbox']:checked").each (function() {
       checkedArray.push($(this).val());
@@ -228,8 +262,10 @@ $(document).ready(function() {
     ///////////////////////////////////////
     //our code should go here
     ///////////////////////////////////////
-var tempReadme = new Readme();
-console.log(tempReadme.text());
+    var tempReadme = new Readme();
+    console.log(tempReadme.text());
+
+    console.log(newIndex.index);
 
     //Adds the index.html file to the zip
     zip.file("index.html",newIndex.index());
@@ -272,6 +308,9 @@ console.log(tempReadme.text());
       }, function(e) {
         showError(e);
       });
+
+
+      ///submit test for headData
 
 
     // create the file and send to user
