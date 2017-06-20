@@ -1,8 +1,0 @@
-<div class="container box">
-		<div class="content center">
-		    <div class="cont_tasto cont_tasto_upload">
-			<a id="tasto_upload" class="tasto"><i class="fa fa-cloud-upload"></i><span class="text">Upload Your Image</span></a>
-		    </div>
-		    <em class="block">Recommended minimum size: <span id="min_size">310x310 px</span></em>
-		</div>
-</div>
