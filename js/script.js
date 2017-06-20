@@ -1,11 +1,12 @@
 //Business Logic
 //Array of options available on the web site
 var options = [
-  {name: "Bootstrap", webUrl: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" , zipFolder: "css/", headContent: "bootstrap.min.css"},
-  {name: "jQuery", webUrl: "https://code.jquery.com/jquery-3.2.1.min.js" , zipFolder: "js/", headContent: "jquery-3.2.1.min.js"},
+  {name: "Bootstrap", webUrl: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" , zipFolder: "css/", headContent: "bootstrap.css"},
+  {name: "jQuery", webUrl: "https://code.jquery.com/jquery-3.2.1.min.js" , zipFolder: "js/", headContent: "jquery-3.2.1.js"},
   {name: "README.md", webUrl: "" , zipFolder: "", headContent: ""}];
 
 var checkedArray = [];
+var checkboxObjArray = [];
 
 // Template Item Object Constructor
 // function TemplateItem(name, filename, url) {
@@ -26,16 +27,17 @@ function Index() {
   this.last = "  <body>\n  </body>\n</html>"
   this.head = function() {
     var tempHead = "  <head>\n"
-    var s = headData(checkedArray,options);
+    var s = headData(checkedArray);
     tempHead += s;
     // this.headItem.forEach(function(item){
     //  tempHead+="\n    " + item.headString;
     // });
     tempHead+="\n  </head>\n";
-    alert(tempHead);
+    console.log(tempHead);
     return tempHead;
   }
   this.index = function(){
+    console.log(this.first + this.head() + this.last);
     return this.first + this.head() + this.last;
   };
 }
@@ -70,29 +72,46 @@ function Readme() {
 }
 
 //Generating head data
-  function headData(checked,options) {
+  function headData(checkedArray) {
     var cssBegValue = '    <link href="';
-    var cssEndValue = '" rel="stylesheet" type="text/css">';
+    var cssEndValue = '" rel="stylesheet" type="text/css">\n';
     var jsBegValue = '    <script href="';
-    var jsEndValue = '"></script>';
+    var jsEndValue = '"></script>\n';
     var tempString = "";
-    for(var i=0;i<checked.length;i++) {
 
-      for(var j=0;j<options.length;j++) {
-
-        if (checked[i]===options[j].name && options[j].webUrl !== "") {
-
-          if (options[j].zipFolder === "js/") {
-            tempString += jsBegValue + options[j].zipFolder + options[j].headContent + jsEndValue + "\n";
-            tempString += jsBegValue + 'js/scripts.js' + jsEndValue + "\n";
-          } else {
-            tempString += cssBegValue + options[j].zipFolder + options[j].headContent + cssEndValue + "\n";
-            tempString += cssBegValue + 'css/styles.css' + cssEndValue + "\n";
-          }
-
-        }
-      }
+    if ($.inArray("Bootstrap",checkedArray)!==-1) {
+      var bootstrap = options.find(function (item) {return item.name === 'Bootstrap';});
+      tempString += cssBegValue + bootstrap.zipFolder + bootstrap.headContent + cssEndValue;
     }
+
+    tempString += cssBegValue + 'css/styles.css' + cssEndValue;
+
+    if ($.inArray("jQuery",checkedArray)!==-1) {
+      var jQuery = options.find(function (item) {return item.name === 'jQuery';});
+      tempString += jsBegValue + jQuery.zipFolder + jQuery.headContent + jsEndValue;
+    }
+
+    tempString += jsBegValue + 'js/scripts.js' + jsEndValue;
+
+
+
+    // for(var i=0;i<checked.length;i++) {
+    //
+    //   for(var j=0;j<options.length;j++) {
+    //
+    //     if (checked[i]===options[j].name && options[j].webUrl !== "") {
+    //
+    //       if (options[j].zipFolder === "js/") {
+    //         tempString += jsBegValue + options[j].zipFolder + options[j].headContent + jsEndValue + "\n";
+    //         tempString += jsBegValue + 'js/scripts.js' + jsEndValue + "\n";
+    //       } else {
+    //         tempString += cssBegValue + options[j].zipFolder + options[j].headContent + cssEndValue + "\n";
+    //         tempString += cssBegValue + 'css/styles.css' + cssEndValue + "\n";
+    //       }
+    //
+    //     }
+    //   }
+    // }
     var slicedTempString = tempString.slice(0,-1); //removes trailing newline
     return slicedTempString;
 
@@ -256,7 +275,10 @@ $(document).ready(function() {
 
     $("input[type='checkbox']:checked").each (function() {
       checkedArray.push($(this).val());
-    });
+    }); // will delete if checkedObjectArray works
+
+
+
 
 
     ///////////////////////////////////////
