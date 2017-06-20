@@ -150,6 +150,7 @@ $(document).ready(function() {
     var input1 = $('<input/>')
       .addClass('ui-all')
       .attr('type', 'checkbox')
+      .attr('value', options[item].name)
       .data('url', options[item].url)
       .appendTo(columnTwoDiv);
 
@@ -218,7 +219,7 @@ $(document).ready(function() {
         if (metadata.currentFile) {
           msg += ", current file = " + metadata.currentFile;
         }
-        showMessage(msg);
+        showMessage(msg);e
         updatePercent(metadata.percent | 0);
       })
       .then(function callback(blob) {
@@ -238,8 +239,15 @@ $(document).ready(function() {
     //       saveAs(blob, "hello.zip");
     //     });
   });
+  var checkedArray = [];
 
+  $("#zipButton").click (function() {
+    $("input[type='checkbox']:checked").each (function() {
+      checkedArray.push($(this).val());
+    });
 
+    alert(checkedArray);
+  });
 
 
 });
