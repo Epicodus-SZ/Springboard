@@ -250,8 +250,8 @@ $(document).ready(function() {
 
 
   $("#resetButton").click (function() {
-    $("#zipForm").reset();
-    checkedArray = [];
+    $("#zipForm")[0].reset();
+    var checkedArray = [];
     alert("cancel button");
   });
 
