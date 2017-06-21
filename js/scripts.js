@@ -1,9 +1,13 @@
 //Business Logic
 //Array of options available on the web site
+
+// <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
 var options = [
-  {name: "Bootstrap", webUrl: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" , zipFolder: "css/", headContent: "bootstrap.css"},
-  {name: "jQuery", webUrl: "https://code.jquery.com/jquery-3.2.1.min.js" , zipFolder: "js/", headContent: "jquery-3.2.1.js"},
-  {name: "README.md", webUrl: "" , zipFolder: "", headContent: ""}];
+  {name: "Bootstrap", webUrl: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" , zipFolder: "css/", file: "bootstrap.css", headContent:"<link href='css/bootstrap.css' rel='stylesheet' type='text/css'>"},
+  {name: "jQuery", webUrl: "https://code.jquery.com/jquery-3.2.1.min.js" , zipFolder: "js/", file: "jquery-3.2.1.js", headContent: "<script src='js/jquery-3.2.1.js'></script>"},
+  {name: "Google Fonts", webUrl: "" , zipFolder: "", file: "", headContent: "<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>"},
+  {name: "README.md", webUrl: "" , zipFolder: "", file: "", headContent:""}];
 
 var checkedArray = [];
 
@@ -49,30 +53,33 @@ function GenerateReadme() {
     return S(readmeText).template(values).s;
 }
 
-//Generating head data
+  //Generating head data
   function headData(checkedArray) {
-    var cssBegValue = '    <link href="';
-    var cssEndValue = '" rel="stylesheet" type="text/css">\n';
-    var jsBegValue = '    <script href="';
-    var jsEndValue = '"></script>\n';
+    //sps = how far to indent
+    var sps = "    ";
     var tempString = "";
+
+    if ($.inArray("Google Fonts",checkedArray)!==-1) {
+      var bootstrap = options.find(function (item) {return item.name === 'Google Fonts';});
+      tempString += sps + bootstrap.headContent + "\n";
+    }
 
     if ($.inArray("Bootstrap",checkedArray)!==-1) {
       var bootstrap = options.find(function (item) {return item.name === 'Bootstrap';});
-      tempString += cssBegValue + bootstrap.zipFolder + bootstrap.headContent + cssEndValue;
+      tempString += sps + bootstrap.headContent + "\n";
     }
 
-    tempString += cssBegValue + 'css/styles.css' + cssEndValue;
+    tempString += sps + "<link href='css/styles.css' rel='stylesheet' type='text/css'>\n"
 
     if ($.inArray("jQuery",checkedArray)!==-1) {
       var jQuery = options.find(function (item) {return item.name === 'jQuery';});
-      tempString += jsBegValue + jQuery.zipFolder + jQuery.headContent + jsEndValue;
+      tempString += sps + jQuery.headContent + "\n";
     }
 
-    tempString += jsBegValue + 'js/scripts.js' + jsEndValue;
+    tempString += sps + "<script src='js/scripts.js'></script>";
 
-    var slicedTempString = tempString.slice(0,-1); //removes trailing newline
-    return slicedTempString;
+    // var slicedTempString = tempString.slice(0,-1); //removes trailing newline
+    return tempString;
 
   }
 
@@ -251,7 +258,7 @@ $(document).ready(function() {
 
   $("#resetButton").click (function() {
     $("#zipForm")[0].reset();
-    var checkedArray = [];
+    checkedArray = [];
   });
 
   //validation on input text field

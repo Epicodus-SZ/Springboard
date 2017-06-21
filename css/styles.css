@@ -1,7 +1,21 @@
 body {
   background-color: #96B0A3;
 }
+#logo {
+  position: absolute;
+  width: 100px;
+  margin-top: -20px;
+  padding-bottom: 20px;
+  -webkit-filter: drop-shadow(1px 1px 0 #555)
+  		            drop-shadow(-1px 1px 0 #555)
+  		            drop-shadow(1px -1px 0 #555)
+        		      drop-shadow(-1px -1px 0 #555);
 
+  	filter: drop-shadow(1px 1px 0px #555)
+  		      drop-shadow(-1px 1px 0px #555)
+  		      drop-shadow(1px -1px 0px #555)
+         		drop-shadow(-1px -1px 0px #555);
+}
 #container {
   width: 800px;
   background-color: #F1E0BF;
@@ -127,9 +141,14 @@ body {
   font-size: 16px;
 }
 
-/*#english {
-  font-weight: bolder;
-}*/
+#english {
+  background-color: #54635c;
+  color: transparent;
+  text-shadow: 2px 2px 1px rgba(255,255,255,0.35);
+  -webkit-background-clip: text;
+     -moz-background-clip: text;
+          background-clip: text;
+}
 
 p {
   font-size: 14px;
