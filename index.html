@@ -8,11 +8,12 @@
   <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
   <link href="http://fonts.googleapis.com/css?family=Bigelow+Rules" rel="stylesheet" type="text/css">
   <script src="js/jquery-3.2.1.js"></script>
+  <script src="js/bootstrap.min.js"></script>
   <script src="js/jszip.js"></script>
   <script src="js/jszip-utils.js"></script>
   <script src="js/FileSaver.js"></script>
   <script src="js/string.js"></script>
-  <script src="js/script.js"></script>
+  <script src="js/scripts.js"></script>
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
   <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet" type="text/css">
@@ -33,7 +34,7 @@
               <div class="form-group">
                 <label for="inputProject" class="col-lg-2 control-label">Project</label>
                 <div class="col-lg-10">
-                  <input type="text" class="form-control" id="inputProject" placeholder="Project Name">
+                  <input type="text" data-toggle="popover" data-placement="top" data-content="Project names cannot contain special characters" class="form-control" id="inputProject" placeholder="Project Name">
                 </div>
               </div>
               <div class="form-group">
@@ -69,7 +70,7 @@
       <a id="resetButton" class="tasto"><i class="fa fa-cloud-download"></i><span class="text">Download it!</span></a>
         </div>
           <div class="cont_tasto cont_tasto_upload">
-        <a id="zipButton" class="tasto"><i class="fa fa-cloud-download"></i><span class="text">Download it!</span></a>
+        <a id="zipButton" class="btn disabled tasto"><i class="fa fa-cloud-download"></i><span class="text">Download it!</span></a>
           </div>
       </div>
   </div>
