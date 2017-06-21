@@ -12,8 +12,15 @@ body {
   box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.5);
 }
 
+#ribbon {
+  padding-left: 753px;
+  padding-bottom: -500px;
+}
+
 #buttonContainer {
   width: 800px;
+  cursor: pointer;
+  text-align: center;
 }
 
 #footer {
@@ -32,7 +39,6 @@ body {
   font-size: 26px;
   line-height: 1.2em;
 }
-
 
 .checkbox label:after,
 .radio label:after {
@@ -93,6 +99,7 @@ body {
     opacity: .5;
 }
 
+
 .tasto { display: inline-block; border:0; border-radius:3px; padding: 0px 10px; text-decoration:none; background-color: #F1E0BF; border-bottom: 2px solid #CBBEA3; color: #D5654C; min-height:15px; min-width:17px; text-align:center; -webkit-appearance: none;font-family: 'Bigelow Rules', cursive; position:relative; }
 .tasto i { font-size:2.25em; color: #92AB9E; margin-right: 10px;}
 .tasto.tasto_piccolo i { font-size:1.75em;}
@@ -107,7 +114,24 @@ body {
 .tasto#zipButton .text {  font-size: 3.125em; line-height: 1em; }
 .tasto#zipButton:hover { color: #F1E0BF; background-color: #D5654C; border-bottom-color: #A03F2E;}
 .tasto#zipButton:hover i { color: #4B291A;}
+.tasto#resetButton { padding: 10px 20px;  text-transform: none; position:relative;}
+.tasto#resetButton .text {  font-size: 3.125em; line-height: 1em; }
+.tasto#resetButton:hover { color: #F1E0BF; background-color: #D5654C; border-bottom-color: #A03F2E;}
+.tasto#resetButton:hover i { color: #4B291A;}
 
 .russian {
   font-family: 'Russo One';
+}
+
+.control-label {
+  font-size: 16px;
+}
+
+/*#english {
+  font-weight: bolder;
+}*/
+
+p {
+  font-size: 14px;
+  font-weight: bold;
 }

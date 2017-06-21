@@ -17,62 +17,62 @@
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
   <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet" type="text/css">
-  <title>My page Title</title>
+  <title>Springboard / Трамплин</title>
 </head>
 
 <body>
   <div id="container" class="container">
-
     <div class="row">
-
       <!-- A form example -->
-      <div class="col-lg-12">
+      <div class="col-xs-12">
+        <a href="https://github.com/you"><img style="position: absolute; top: -45px; right: -30px; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+
         <div class="bs-component">
           <form id="zipForm" class="form-horizontal">
             <!-- <fieldset> -->
-              <h1>Springboard / <span class="russian">трамплин</span></h1>
-              <div class="form-group">
-                <label for="inputProject" class="col-lg-2 control-label">Project</label>
-                <div class="col-lg-10">
+
+            <h1 id="english">Springboard / <span class="russian">Трамплин</span></h1>
+            <div class="form-group">
+              <label for="inputProject" class="col-lg-2 control-label">Project</label>
+              <div class="col-lg-10">
                   <input type="text" data-toggle="popover" data-placement="top" data-content="Project names cannot contain special characters" class="form-control" id="inputProject" placeholder="Project Name">
                 </div>
               </div>
-              <div class="form-group">
-                <label for="inputName" class="col-lg-2 control-label">Developer</label>
-                <div class="col-lg-10">
-                  <input type="text" class="form-control" id="inputName" placeholder="Developer Name">
-                  <div class="checkbox">
-					          <p>Select the items you want incuded in your project:</p>
-                    <div id="optionNameMenu" class="form-group-row">
-                    </div>
+            </div>
+            <div class="form-group">
+              <label for="inputName" class="col-lg-2 control-label">Developer</label>
+              <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputName" placeholder="Developer Name">
+                <br>
+                <div class="checkbox">
+					        <p>Select the items you want incuded in your project:</p>
+                  <div id="optionNameMenu" class="form-group-row">
                   </div>
                 </div>
               </div>
-              <div class="form-group">
-                <div class="col-lg-10 col-lg-offset-2">
-                  <button type="button" class="btn btn-default" id="resetButton">Cancel</button>
-
-                  <!-- <button id="zipButton" type="submit" class="btn btn-primary">Download</button> -->
-                </div>
-              </div>
+            </div>
           </form>
         </div>
       </div>
-      <!--end of column -->
+      <!-- end of column -->
     </div>
   </div>
   <div id="footer" class="container">
     <p>(C) STEVE ZASKE, 2017</p>
   </div>
   <div id="buttonContainer" class="container">
-      <div class="content center">
-        <div class="cont_tasto cont_tasto_upload">
-      <a id="resetButton" class="tasto"><i class="fa fa-cloud-download"></i><span class="text">Download it!</span></a>
+    <div class="content center">
+      <div class="cont_tasto cont_tasto_upload">
+        <a id="zipButton" class="btn tasto"><i class="fa fa-cloud-download"></i><span class="text"><strong>Download it!</strong></span></a>
         </div>
           <div class="cont_tasto cont_tasto_upload">
         <a id="zipButton" class="btn disabled tasto"><i class="fa fa-cloud-download"></i><span class="text">Download it!</span></a>
           </div>
       </div>
+      <div class="cont_tasto cont_tasto_upload">
+        <a id="resetButton" class="btn tasto"><i class="fa fa-cloud-download"></i><span class="text"><strong>Cancel</strong></span></a>
+      </div>
+    </div>
   </div>
 
 </body>
