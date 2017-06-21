@@ -302,5 +302,11 @@ $(document).ready(function() {
           modal.style.display = "none";
       }
   }
-  
+
+  //temp bug fix for bootstrap js
+  $('body').on('hidden.bs.popover', function (e) {
+      $(e.target).data("bs.popover").inState.click = false;
+  });
+
+
 });
