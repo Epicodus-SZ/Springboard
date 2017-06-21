@@ -44,8 +44,8 @@ function writeScriptHead(url){
 function GenerateReadme() {
     var d = new Date();
     var today = (d.getMonth()+1)+"/"+d.getDate()+"/"+d.getFullYear();
-    var values = {name: $("#inputProject").val(), dev: $("#inputName").val(), day: today}
-    readmeText = "# {{name}}\n[Add your description here]. Originally coded on {{day}}. By {{dev}}. \n### License\nCopyright 2017 {{dev}}\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.";
+    var values = {name: $("#inputProject").val(), dev: $("#inputName").val(), day: today, year:d.getFullYear()}
+    readmeText = "# {{name}}\n[Add your description here]. Originally coded on {{day}}. By {{dev}}. \n\n### License\nCopyright {{year}} {{dev}}\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.";
     return S(readmeText).template(values).s;
 }
 
@@ -185,6 +185,7 @@ $(document).ready(function() {
       .appendTo($(".cr").last());
   });
 
+  //Event listener for Download button
   $("#zipButton").click(function(event) {
     event.preventDefault(); // supresses a server event
 
@@ -209,6 +210,12 @@ $(document).ready(function() {
 
     //Adds the index.html file to the zip
     zip.file(projectName+"/index.html",newIndex.index());
+
+    //Add CSS file
+    zip.file(projectName+"/css/styles.css","");
+
+    //Add a blank scripts.js file
+    zip.file(projectName+"/js/scripts.js","");
 
     //Add the files to the zip
     checkedArray.forEach(function(item){
@@ -242,11 +249,26 @@ $(document).ready(function() {
       });
   });
 
-
-
   $("#resetButton").click (function() {
     $("#zipForm")[0].reset();
     var checkedArray = [];
   });
+
+  //validation on input text field
+  $('#inputProject').on('input', function() {
+  	var input=$(this);
+    var re = /^[A-Za-z0-9_](?!.*?\s$)[A-Za-z0-9\s]{0,20}$/;
+    if (!(input.val().match(re))){
+      $("#zipButton").addClass('disabled');
+      $(this).addClass('has-error');
+      input.popover('show');
+
+    }
+    else {
+      $("#zipButton").removeClass('disabled');
+      $(this).removeClass('has-error');
+      input.popover('hide');
+    }
+  }); // end of input event listener
 
 });
