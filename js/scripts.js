@@ -44,11 +44,9 @@ function Index() {
     //  tempHead+="\n    " + item.headString;
     // });
     tempHead += "\n  </head>\n";
-    console.log(tempHead);
     return tempHead;
   }
   this.index = function() {
-    console.log(this.first + this.head() + this.last);
     return this.first + this.head() + this.last;
   };
 }
