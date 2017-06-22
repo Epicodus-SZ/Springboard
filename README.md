@@ -1,8 +1,8 @@
 # SPRINGBOARD
-A simple, web development file structure, to speed web development.  This template is a good starting point for a web site requiring Bootstrap, jQuery, Google Fonts and README. Coded by Team Bunny and presented on June 22,2017 at the Epicodus Trade Show.
+A simple, web development file structure, to speed web development.  This template is a good starting point for a web site requiring Bootstrap, jQuery, Google Fonts and README. Coded by Team Bunny and presented on June 22, 2017 at the Epicodus Trade Show.
 
-## Install Instructions
-1. Go to this [link]()
+## Instructions
+1. Go to this [link](https://Epicodus-SZ/github.io/Springboard)
 2. Input the Project Name to activate the download button
 3. You have the option of filling out the field for Developer Name
 4. Select the options that you would like to include in your project
@@ -55,6 +55,7 @@ Direct questions and comments to: [github@zaske.com](mailto:github@zaske.com)
 * JSZipUtils
 * FileSaver
 * String.js
+* Sound effects obtained from www.zapsplat.com
 
 ### License
 Copyright (c) 2017 Team Bunny
