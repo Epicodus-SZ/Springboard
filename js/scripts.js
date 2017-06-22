@@ -229,7 +229,9 @@ $(document).ready(function() {
   $("#zipButton").click(function(event) {
     event.preventDefault(); // supresses a server event
 
-
+    //plays bounce sound effect
+    var audioDownload = document.getElementById("audio");
+      audioDownload.play();
 
     //creates our zip file object
     var zip = new JSZip();
@@ -340,7 +342,11 @@ $("input").change(function(){
   // When the user clicks on the button, open the modal
   btn.onclick = function() {
       modal.style.display = "block";
+
+    var audioModal = document.getElementById("audio1");
+      audioModal.play();
   }
+
 
   // When the user clicks on <span> (x), close the modal
   span.onclick = function() {
