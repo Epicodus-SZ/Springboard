@@ -32,15 +32,9 @@ var options = [{
 
 var checkedArray = [];
 
-function HeadItem(headString, placeInHead) {
-  this.headString = headString;
-  this.placeInHead = placeInHead;
-}
-
 //Index Object Constructor
 function Index() {
   this.first = "<!DOCTYPE html>\n<html>\n"
-  this.headItem = [];
   this.last = "  <body>\n  </body>\n</html>"
   this.head = function() {
     var tempHead = "  <head>\n"
@@ -291,10 +285,8 @@ $(document).ready(function() {
 
       if (Opts[0].webUrl) {
         var url = Opts[0].webUrl;
-        var filename = projectName + "/" + Opts[0].zipFolder + Opts[0].headContent;
-        zip.file(filename, urlToPromise(url), {
-          binary: true
-        });
+        var filename = projectName+"/"+Opts[0].zipFolder+Opts[0].file;
+        zip.file(filename, urlToPromise(url), { binary: true });
       }
     });
 
