@@ -1,5 +1,8 @@
 # SPRINGBOARD
-A simple, web development file structure, to speed web development.  This template is a good starting point for a web site requiring Bootstrap, jQuery, Google Fonts and README. Coded by Team Bunny and presented on June 22, 2017 at the Epicodus Trade Show.
+A web site to help speed your web development.  The site will download a ZIP containing everything you need to start a web project.  Then just initialize the folder as a git repository and you're ready to go. A good starting point for a web site requiring Bootstrap, jQuery, Google Fonts and README. Coded by Team Bunny and presented on June 22, 2017 at the Epicodus Trade Show.
+
+## Working site
+[Springboard](https://Epicodus-SZ.github.io/Springboard)
 
 ## Instructions
 1. Go to this [link](https://Epicodus-SZ.github.io/Springboard)
