@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:300,400,900" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
   <link href="http://fonts.googleapis.com/css?family=Bigelow+Rules" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro" rel="stylesheet">
   <script src="js/jquery-3.2.1.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/jszip.js"></script>
@@ -14,8 +15,10 @@
   <script src="js/FileSaver.js"></script>
   <script src="js/string.js"></script>
   <script src="js/scripts.js"></script>
+
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
   <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://use.fontawesome.com/d68b427823.js"></script>
   <link href="css/styles.css" rel="stylesheet" type="text/css">
   <title>Springboard / Трамплин</title>
 </head>
@@ -26,7 +29,7 @@
       <!-- A form example -->
       <img id="logo" src="img/bunny.png" alt="bunny">
       <div class="col-xs-12">
-        <a href="https://github.com/Epicodus-SZ/Springboard"><img style="position: absolute; top: -45px; right: -30px; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+        <a href="https://github.com/Epicodus-SZ/Springboard"><img style="position: absolute; top: -60px; right: -30px; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
 
         <div class="bs-component">
           <form id="zipForm" class="form-horizontal">
@@ -44,14 +47,46 @@
               <label for="inputName" class="col-lg-2 control-label">Developer</label>
               <div class="col-lg-10">
                 <input type="text" class="form-control" id="inputName" placeholder="Developer Name">
-                <br>
-                <p>Select the items you want incuded in your project:</p>
+              </div>
+            </div>
+            <div class="form-group optionList">
+              <label for="inputProject" class="col-lg-2 control-label">Select items for your project:</label>
+              <div class="col-lg-5">
                 <div id="checkboxes">
                   <div id="optionNameMenu" class="form-group-row">
                   </div>
                 </div>
               </div>
+              <div id="tree" class="col-lg-5">
+                <ul class="fa-ul">
+                  <li><i class="fa fa-folder-open" aria-hidden="true"></i> <span id="spanProject"></span></li>
+                  <ul class="fa-ul">
+                    <li><i class="fa fa-folder-open" aria-hidden="true"></i> CSS</li>
+                    <ul class="fa-ul">
+                      <li id="liBootstrap"><i class="fa fa-file-text-o" aria-hidden="true"></i> bootstrap.min.css</li>
+                      <li><i class="fa fa-file-text-o" aria-hidden="true"></i> styles.css</li>
+                    </ul>
+                  </ul>
+                  <ul class="fa-ul">
+                    <li><i class="fa fa-folder-open" aria-hidden="true"></i> JS</li>
+                    <ul class="fa-ul">
+                      <li id="liJquery"><i class="fa fa-file-text-o" aria-hidden="true"></i> jquery-3.2.1.js</li>
+                      <li><i class="fa fa-file-text-o" aria-hidden="true"></i> scripts.js</li>
+                    </ul>
+                  </ul>
+                  <ul class="fa-ul">
+                    <li><i class="fa fa-file-text-o" aria-hidden="true"></i> index.html</li>
+                  </ul>
+                  <ul class="fa-ul">
+                    <li id="liReadme"><i class='fa fa-file-text-o' aria-hidden='true'></i> README.md  </li>
+                  </ul>
+                </ul>
+
             </div>
+            </div>
+
+
+
           </form>
         </div>
       </div>
@@ -73,6 +108,7 @@
       </div>
     </div>
   </div>
+
   <!-- The Modal -->
   <div id="myModal" class="modal">
     <div class="modal-content">
@@ -89,6 +125,7 @@
       </ul></strong>
     </div>
   </div>
+
 </body>
 
 </html>

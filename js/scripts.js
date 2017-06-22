@@ -43,7 +43,6 @@ function writeScriptHead(url){
   return "<script src='js/" + url + "'></script>"
 }
 
-
 //Generating README
 function GenerateReadme() {
     var d = new Date();
@@ -86,6 +85,48 @@ function GenerateReadme() {
 //////////////////////////////
 //UI Logic
 //////////////////////////////
+function generateFileTree() {
+
+  var checkedBoxes = $("input:checked").get();
+  var unchecked = $("input:checkbox:not(:checked)").get();
+
+  // hide all unchecked options
+  unchecked.forEach(function(item){
+    if (item.value==="README.md"){
+      $("#liReadme").hide();
+    }
+    if (item.value==="Bootstrap"){
+      $("#liBootstrap").hide();
+    }
+    if (item.value==="jQuery"){
+      $("#liJquery").hide();
+    }
+  });
+
+  // show all checked options
+  checkedBoxes.forEach(function(item){
+    if (item.value==="README.md"){
+      $("#liReadme").show();
+    }
+    if (item.value==="Bootstrap"){
+      $("#liBootstrap").show();
+    }
+    if (item.value==="jQuery"){
+      $("#liJquery").show();
+    }
+  });
+
+
+  //nothing is selected
+  // if (checkedBoxes.length === 0) {
+  //   $("#liReadme").hide();
+  //   $("#liBootstrap").hide();
+  //   $("#liJquery").hide();
+  // }
+
+
+}
+
 
 $(document).ready(function() {
 
@@ -155,16 +196,8 @@ $(document).ready(function() {
   }
 
   var optionList = $('#optionNameMenu')
-  //
-  // <div class="checkbox">
-  //   <label style="font-size: 1.5em">
-  //       <input type="checkbox" value="">
-  //       <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-  //       Bigger
-  //   </label>
-  // </div>
 
-
+  $("#spanProject").text("New Project");
 
   //dynamic checkboxes
   $.each(options, function(item) {
@@ -196,10 +229,13 @@ $(document).ready(function() {
   $("#zipButton").click(function(event) {
     event.preventDefault(); // supresses a server event
 
+
+
     //creates our zip file object
     var zip = new JSZip();
     var projectName = $("#inputProject").val();
     var developerName = $("#inputName").val();
+
 
 
     //creates a new index object
@@ -258,11 +294,15 @@ $(document).ready(function() {
 
   $("#resetButton").click (function() {
     $("#zipForm")[0].reset();
-    checkedArray = [];
+    checkedArray = []; // clear the array
+    $("#spanProject").text("New Project"); //reset the
+    generateFileTree(); //reset the file tree view
+    $("#zipButton").addClass('disabled'); //disable the download button
   });
 
   //validation on input text field
   $('#inputProject').on('input', function() {
+
   	var input=$(this);
     var re = /^[A-Za-z0-9_](?!.*?\s$)[A-Za-z0-9\s]{0,20}$/;
     if (!(input.val().match(re))){
@@ -276,7 +316,18 @@ $(document).ready(function() {
       $(this).removeClass('has-error');
       input.popover('hide');
     }
+
+    $("#spanProject").text($("#inputProject").val());
+
+
   }); // end of input event listener
+
+//change event listener
+$("input").change(function(){
+  //refresh the file list
+  generateFileTree();
+});
+
   // Get the modal
   var modal = document.getElementById('myModal');
 
@@ -307,6 +358,7 @@ $(document).ready(function() {
   $('body').on('hidden.bs.popover', function (e) {
       $(e.target).data("bs.popover").inState.click = false;
   });
+
 
 
 });

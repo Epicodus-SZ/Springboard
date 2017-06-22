@@ -5,7 +5,8 @@ body {
 #logo {
   position: absolute;
   width: 100px;
-  margin-top: -20px;
+  margin-left: 65px;
+  margin-top: -30px;
   padding-bottom: 20px;
   -webkit-filter: drop-shadow(1px 1px 0 #555)
   		            drop-shadow(-1px 1px 0 #555)
@@ -18,10 +19,11 @@ body {
          		drop-shadow(-1px -1px 0px #555);
 }
 #container {
-  width: 800px;
+  width: 900px;
   background-color: #F1E0BF;
   margin-top: 15px;
   padding: 45px;
+  padding-top: 60px;
   border: .4px solid #555;
   border-radius: 5px;
   box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.5);
@@ -143,6 +145,7 @@ body {
 }
 
 #english {
+  margin-left: 90px;
   background-color: #54635c;
   color: transparent;
   text-shadow: 2px 2px 1px rgba(255,255,255,0.35);
@@ -235,6 +238,7 @@ input.form-control:focus {
   border: 1px solid #aaa;
   border-radius: 4px;
   padding: 15px;
+  min-height: 270px;
 }
 
 .checkbox {padding-bottom: 10px;}
@@ -250,4 +254,28 @@ input.form-control:focus {
 @keyframes animatetop {
     from {top: -300px; opacity: 0}
     to {top: 0; opacity: 1}
+}
+
+#tree {
+  font-family: 'Anonymous Pro', monospace;
+  font-weight: bolder;
+  font-size: 14px;
+  background-color: rgba(255,255,255,.5);
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  padding: 15px;
+  color: #333;
+  min-height: 270px;
+}
+
+#liReadme, #liBootstrap, #liJquery {
+  display: none;
+}
+
+.form-group {
+  margin:10px;
+}
+
+.optionList {
+  margin-top: 20px;
 }
