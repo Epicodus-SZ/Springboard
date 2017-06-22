@@ -2,7 +2,7 @@
 A simple, web development file structure, to speed web development.  This template is a good starting point for a web site requiring Bootstrap, jQuery, Google Fonts and README. Coded by Team Bunny and presented on June 22, 2017 at the Epicodus Trade Show.
 
 ## Instructions
-1. Go to this [link](https://Epicodus-SZ/github.io/Springboard)
+1. Go to this [link](https://Epicodus-SZ.github.io/Springboard)
 2. Input the Project Name to activate the download button
 3. You have the option of filling out the field for Developer Name
 4. Select the options that you would like to include in your project
